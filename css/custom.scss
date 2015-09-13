@@ -1,0 +1,44 @@
+.border-select{
+	margin-top: 10px;
+}
+
+.display-chk{
+	display: inline-block;
+}
+
+.btn-actualizar {
+	background: #77c930;
+  background-image: -webkit-linear-gradient(top, #77c930, #61a327);
+  background-image: -moz-linear-gradient(top, #77c930, #61a327);
+  background-image: -ms-linear-gradient(top, #77c930, #61a327);
+  background-image: -o-linear-gradient(top, #77c930, #61a327);
+  background-image: linear-gradient(to bottom, #77c930, #61a327);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn-actualizar:hover {
+  background: #77ff00;
+  background-image: -webkit-linear-gradient(top, #77ff00, #000000);
+  background-image: -moz-linear-gradient(top, #77ff00, #000000);
+  background-image: -ms-linear-gradient(top, #77ff00, #000000);
+  background-image: -o-linear-gradient(top, #77ff00, #000000);
+  background-image: linear-gradient(to bottom, #77ff00, #000000);
+  text-decoration: none;
+}
+
+table, td, th {
+  padding: 5px;
+  border: 1px solid green;
+}
+
+th{
+	background-color: darkblue;
+	color: white;
+}

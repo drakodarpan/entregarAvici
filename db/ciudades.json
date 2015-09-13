@@ -1,0 +1,42 @@
+[
+  {
+    "ciudad":"MADRID",
+    "tipotarifa":"ABONO ANUAL",
+    "tarifa":"25"
+  },
+  {
+    "ciudad":"MADRID",
+    "tipotarifa":"1 HORA O FRACCION",
+    "tarifa":"2"
+  },
+  {
+    "ciudad":"MADRID",
+    "tipotarifa":"2 HORAS",
+    "tarifa":"4"
+  },
+  {
+    "ciudad":"MADRID",
+    "tipotarifa":"PENALIZACION POR EXCEDER TIEMPO DE USO",
+    "tarifa":"4"
+  },
+  {
+    "ciudad":"BARCELONA",
+    "tipotarifa":"ABONO ANUAL",
+    "tarifa":"25"
+  },
+  {
+    "ciudad":"BARCELONA",
+    "tipotarifa":"MENOS DE 30 MINUTOS",
+    "tarifa":"GRATIS"
+  },
+  {
+    "ciudad":"BARCELONA",
+    "tipotarifa":"CADA 30 MINUTOS DESPUES HASTA 2 HRS",
+    "tarifa":"0,74"
+  },
+  {
+    "ciudad":"BARCELONA",
+    "tipotarifa":"PENALIZACION POR EXCEDER TIEMPO DE USO",
+    "tarifa":"4,49"
+  }
+]
