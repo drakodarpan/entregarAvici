@@ -89,17 +89,33 @@ var showTable = function(ciudad){
 
 // Inicio grafica cantidad de estaciones
 function chkCantidadEstaciones(nOpciones){
-  var j = 0
   if( nOpciones === 1 ){
     var selectedArray = new Array(),
         ciudades = document.getElementById("ciudad"),
-        ciudad = new Array(), count = 0, chart = ""
+        ciudad = new Array()
+
+    var options = {
+      // data: [
+      //   theme: "theme2",
+      //   title:{
+      //     text: "Total de estaciones"
+      //   },
+      //   animationEnable: true,
+        data:[{
+          type: "column",
+          dataPoints: [ ]
+        }]
+      //]
+    }
+
+    $("#chartEstaciones").CanvasJSChart(options)
+    var chart = $("#chartEstaciones").CanvasJSChart()
 
     for( var i = 0; i < ciudades.options.length; i++){
       if( ciudades.options[i].selected){
-        selectedArray[count] = ciudades.options[i].value
-        ciudad[i] = selectedArray[count]
-        chart = showEstacionalesBar(ciudad)
+        var length = chart.options.data[0].dataPoints.length
+        chart.options.data[0].dataPoints.push({ label: ciudad, y: consultaEstacionesJSON(ciudad) })
+
       }
     }
 
@@ -110,10 +126,8 @@ function chkCantidadEstaciones(nOpciones){
   }
 }
 
-function showEstacionalesBar(ciudad){
-  //for( var i = 0;)
+function showEstacionalesBar(chart, ciudad){
 
-console.log(ciudad)
 
   var chart = new CanvasJS.Chart("chartEstaciones", {
     theme: "theme2",
@@ -127,11 +141,11 @@ console.log(ciudad)
     }]
   })
 
-  return chart
+  chart.render()
 }
 
 function consultaEstacionesJSON(ciudad){
-  var valor = new Array(), i = 0, j = 0
+  var valor = 0, i = 0, j = 0
   $.ajax({
     url: 'db/estaciones.json',
     dataType: 'json',
@@ -139,15 +153,13 @@ function consultaEstacionesJSON(ciudad){
     async: false,
     success: function(json){
       $.each(json, function(key, val){
-        if( val.ciudad === ciudad[i] ){
+        if( val.ciudad === ciudad ){
           $.each(this, function(k,v){
             if( v >= 0){
-              valor[j] = v
-              j++
+              valor = v
             }
           })
         }
-        i++
       })
     }
   })
