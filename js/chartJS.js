@@ -7,6 +7,9 @@ var ExecuteChart = function(){
     "chkCantidadEstaciones" : function(opcion){
       chkCantidadEstaciones(opcion)
     },
+    "chartNewUser" : function(opcion){
+        chkNvosUsuarios(opcion)
+    },
     "default" : function(){
       alert("Favor de seleccionar un [ INDICADOR ]...")
     }
@@ -22,6 +25,12 @@ var ExecuteChart = function(){
     opciones['chkCantidadEstaciones'](1)
   } else {
     opciones['chkCantidadEstaciones'](0)
+  }
+
+  if($("#chkNvosUsuarios").is(':checked')){
+    opciones['chartNewUser'](1)
+  } else {
+    opciones['chartNewUser'](0)
   }
 }
 
@@ -90,58 +99,36 @@ var showTable = function(ciudad){
 // Inicio grafica cantidad de estaciones
 function chkCantidadEstaciones(nOpciones){
   if( nOpciones === 1 ){
+
     var selectedArray = new Array(),
         ciudades = document.getElementById("ciudad"),
         ciudad = new Array()
 
-    var options = {
-      // data: [
-      //   theme: "theme2",
-      //   title:{
-      //     text: "Total de estaciones"
-      //   },
-      //   animationEnable: true,
-        data:[{
-          type: "column",
-          dataPoints: [ ]
-        }]
-      //]
-    }
-
-    $("#chartEstaciones").CanvasJSChart(options)
-    var chart = $("#chartEstaciones").CanvasJSChart()
+    var chart = new CanvasJS.Chart("chartEstaciones", {
+      theme: "theme2",
+      title:{
+        text: "Total de estaciones"
+      },
+      animationEnable: true,
+      data:[{
+        type: "column",
+        dataPoints: [ ]
+      }]
+    })
 
     for( var i = 0; i < ciudades.options.length; i++){
       if( ciudades.options[i].selected){
         var length = chart.options.data[0].dataPoints.length
-        chart.options.data[0].dataPoints.push({ label: ciudad, y: consultaEstacionesJSON(ciudad) })
-
+        chart.options.data[0].dataPoints.push({ label: ciudades.options[i].value, y: consultaEstacionesJSON(ciudades.options[i].value) })
       }
     }
 
     chart.render()
+
     $("#chartEstaciones").show()
   }else {
     $("#chartEstaciones").hide()
   }
-}
-
-function showEstacionalesBar(chart, ciudad){
-
-
-  var chart = new CanvasJS.Chart("chartEstaciones", {
-    theme: "theme2",
-    title:{
-      text: "Total de estaciones"
-    },
-    animationEnable: true,
-    data:[{
-      type: "column",
-      dataPoints: [ { label: ciudad, y: consultaEstacionesJSON(ciudad) } ]
-    }]
-  })
-
-  chart.render()
 }
 
 function consultaEstacionesJSON(ciudad){
@@ -167,3 +154,62 @@ function consultaEstacionesJSON(ciudad){
   return parseInt(valor)
 }
 // Fin grafica cantidad de estaciones
+
+// Inicio grafica new users
+function chkNvosUsuarios(nOpciones){
+  if( nOpciones === 1 ){
+
+    var selectedArray = new Array(),
+        ciudades = document.getElementById("ciudad"),
+        ciudad = new Array()
+
+    var chart = new CanvasJS.Chart("chartNewUser", {
+      theme: "theme2",
+      title:{
+        text: "Nuevos usuarios"
+      },
+      animationEnable: true,
+      data:[{
+        type: "column",
+        dataPoints: [ ]
+      }]
+    })
+
+    for( var i = 0; i < ciudades.options.length; i++){
+      if( ciudades.options[i].selected){
+        var length = chart.options.data[0].dataPoints.length
+        chart.options.data[0].dataPoints.push({ label: ciudades.options[i].value, y: consultaEstacionesJSON(ciudades.options[i].value) })
+      }
+    }
+
+    chart.render()
+
+    $("#chartNewUser").show()
+  }else {
+    $("#chartNewUser").hide()
+  }
+}
+
+function consultaEstacionesJSON(ciudad){
+  var valor = 0, i = 0, j = 0
+  $.ajax({
+    url: 'db/usuariosnew.json',
+    dataType: 'json',
+    //data: data,
+    async: false,
+    success: function(json){
+      $.each(json, function(key, val){
+        if( val.ciudad === ciudad ){
+          $.each(this, function(k,v){
+            if( v >= 0){
+              valor = v
+            }
+          })
+        }
+      })
+    }
+  })
+
+  return parseInt(valor)
+}
+// Fin grafica new users

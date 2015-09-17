@@ -1,0 +1,12 @@
+[
+  {
+    "ciudad":"MADRID",
+    "clientesactivos":"30830",
+    "habitantes" : "3165601"
+  },
+  {
+    "ciudad":"BARCELONA",
+    "clientesactivos":"95395",
+    "habitantes" : "1700000"
+  }
+]
